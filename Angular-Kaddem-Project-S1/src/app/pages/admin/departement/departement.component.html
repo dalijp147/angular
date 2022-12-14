@@ -1,0 +1,82 @@
+<section class="section" style="margin-top: 100px">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header  p-1 m-0 d-flex align-items-center">
+          <div class="row justify-content-start">
+            <i class='fa-solid fa-building fa-lg mt-3 col ' style='font-size:36px'></i>
+            <h2 class="card-title col ">Departements</h2>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+            <div class="dataTable-bottom">
+              <div class="input-group">
+                <div class="form-outline">
+                  <input type="search" id="form1" class="form-control"
+                  [(ngModel)]="nomDepartement">
+                </div>
+                <button type="button" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <button
+                  (click)="openAddDepartementDialog()" mat-raised-button="" color="primary"
+                  class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base "
+                  style="float: right;" >
+                  <span class="mat-mdc-button-persistent-ripple mdc-button__ripple">
+                  </span>
+                  <i class="fa-solid fa-plus"></i><span class="mat-mdc-focus-indicator"></span>
+                  <span matripple="" class="mat-ripple mat-mdc-button-ripple"></span
+                  ><span class="mat-mdc-button-touch-target"></span>
+              </button>
+          </div>
+
+            <div class="dataTable-container">
+              <table class="table datatable dataTable-table ">
+                <thead class="">
+                  <tr>
+                    <th scope="col" data-sortable="" style="width: 75.0537%">
+                      Nom
+                    </th>
+
+                    <th scope="col" data-sortable="" style="width: 9.203%">
+                      Etudiants
+                    </th>
+
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let departement of departements  | filter:nomDepartement
+                | paginate: { itemsPerPage: 3, currentPage: nbrPage }">
+                  <tr>
+                    <td style="color: #256d85">{{ departement.nomDepart }}</td>
+                    <td style="color: #256d85"><button type="button" (click)="openListEtudiantDialog(departement)" class="btn btn-outline-success"><i
+                          class="fas fa-users	"></i></button></td>
+
+
+                    <td style="display: flex; gap: 8px;" class="mt-2">
+                      <button mat-fab (click)="deleteDepartement(departement.id)"
+                        style="width: 30px; height: 30px;display: flex;justify-content: center;align-items: center;"
+                        color="primary" aria-label="Example icon button with a delete icon">
+                        <mat-icon style="height: 18px; width: 18px; font-size: 18px">delete</mat-icon>
+                      </button>
+                      <button mat-fab (click)="openEditDepartementDialog(departement)"
+                        style="width: 30px;height: 30px;display: flex;justify-content: center;align-items: center;"
+                        color="accent" aria-label="Example icon button with a delete icon">
+                        <i style="font-size: 12px" class="bi bi-gear"></i>
+                      </button>
+                  </tr>
+                </tbody>
+              </table>
+
+              <pagination-controls (pageChange)="nbrPage = $event"></pagination-controls>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
